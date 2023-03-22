@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <libnet.h>
 
-#define TARGET_IP_ADDR "192.168.1.10" // 目标服务器IP地址
-#define TARGET_PORT 9000              // 目标服务器端口
-#define SOURCE_PORT 12345             // 源端口
+#define TARGET_IP_ADDR "127.0.0.1" // 目标服务器IP地址
+#define TARGET_PORT 9000           // 目标服务器端口
+#define SOURCE_PORT 12345          // 源端口
 
 int main()
 {
@@ -43,6 +43,7 @@ int main()
     }
 
     // 构建IP数据包
+    // 构建IP数据包
     libnet_ptag_t ip_tag = libnet_build_ipv4(
         LIBNET_IPV4_H + LIBNET_UDP_H + payload_length,             // 长度(IP头部长度+UDP头部长度+负载长度)
         0,                                                         // 服务类型
@@ -53,6 +54,8 @@ int main()
         0,                                                         // 校验和, 设为0让libnet自动计算
         libnet_get_ipaddr4(l),                                     // 源IP地址, 使用默认源IP
         libnet_name2addr4(l, TARGET_IP_ADDR, LIBNET_DONT_RESOLVE), // 目标IP地址
+        NULL,                                                      // 由于UDP包已经包含了负载，这里设置为NULL
+        0,                                                         // 负载长度设置为0
         l,                                                         // libnet句柄
         0                                                          // 0表示新构建一个数据包
     );
@@ -72,12 +75,11 @@ int main()
     }
     libnet_destroy(l);
     return EXIT_FAILURE;
-}
 
-printf("UDP数据包已发送! (共%d字节)\n", bytes_written);
+    printf("UDP数据包已发送! (共%d字节)\n", bytes_written);
 
-// 销毁libnet句柄
-libnet_destroy(l);
+    // 销毁libnet句柄
+    libnet_destroy(l);
 
-return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
