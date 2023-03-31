@@ -32,7 +32,8 @@ def print_packet(packet):
         checksum = packet[UDP].chksum
         print(f"[blue]Protocol: {protocol_type}\t[/blue]Src IP: {src_ip}\tDst IP: {dst_ip}\tSrc Port: {src_port}\tDst Port: {dst_port}\tLength: {length}\tChecksum: {checksum}")
         with open(file_name, "a") as f:
-            f.write(f"{src_ip}\t{dst_ip}\t{src_port}\t{dst_port}\n") 
+            f.write(f"{src_ip}\t{dst_ip}\t{src_port}\t{dst_port}\n")
+
 
 if __name__ == "__main__":
     try:

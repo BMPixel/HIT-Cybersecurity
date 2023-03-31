@@ -1,0 +1,19 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "exp3/udp_send_pkg",
+            "type": "shell",
+            "command": "gcc -o exp3/udp_hello_world exp3/udp_hello_world.c -lnet && sudo ./exp3/udp_hello_world",
+            "problemMatcher": []
+        },
+        {
+            "label": "exp3/udp_recv_pkg",
+            "type": "shell",
+            "command": "python3 exp3/upd_receiver.py",
+            "problemMatcher": []
+        }
+    ]
+}
